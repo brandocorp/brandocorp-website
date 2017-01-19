@@ -1,0 +1,19 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: troykinsella/concourse-fly-resource
+
+params:
+  url: http://172.17.0.3:8080
+  username: concourse
+  password: changeme
+  config: path/to/pipeline.yml
+  pipeline: my-pipeline-name
+
+inputs:
+  - name: master-pipeline
+
+run:
+  path: master-pipeline/ci/scripts/fly-set-pipeline.sh
