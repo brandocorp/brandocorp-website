@@ -73,7 +73,7 @@ jobs:
             source:
               repository: concourse/git-resource
           inputs:
-            - master-pipeline
+            - name: master-pipeline
           run:
             path: test -f master-pipeline/ci/pipelines/master.yml
       - put: fly
