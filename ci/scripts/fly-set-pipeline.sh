@@ -1,6 +1,7 @@
-#!/bin/bash -eux
-source /opt/resource/common.sh
+#!/bin/sh -eux
+. /opt/resource/common.sh
 
-init_fly "$url" "$username" "$password"
+fetch_fly "$url" "$username" "$password"
+login "$url" "$username" "$password" yes;
 
 fly -t main set-pipeline -c "$config" -p "$pipeline"
