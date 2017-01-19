@@ -69,6 +69,3 @@ jobs:
         params:
           command: set-pipeline
           options: -c master-pipeline/ci/pipelines/master.yml -p brandocorp-website
-
-      - task: update-pipeline
-        file: brandocorp-website/ci/tasks/update-pipeline.yml
