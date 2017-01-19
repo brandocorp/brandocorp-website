@@ -9,14 +9,21 @@ resource_types:
     source:
       repository: brandocorp/ubuntu-xenial-package
       tag: latest
-  - name: cookbook-pipeline
+  - name: fly
     type: docker-image
     source:
-      repository: brandocorp/concourse-pipeline-resource
+      repository: troykinsella/concourse-fly-resource
       tag: latest
 
 resources:
-  - name: cookbook-workflow-pipeline
+  - name: fly
+    type: fly
+    source:
+      uri: http://172.17.0.3:8080
+      username: concourse
+      password: changeme
+
+  - name: master-pipeline
     type: git
     source:
       uri: git@github.com:brandocorp/brandocorp-website.git
@@ -52,14 +59,16 @@ resources:
         Ir9SS3yAuC9zQE7g2A2yjEnUNeUndj7drbCd5z39ht8XaCXUVwWy9O4=
         -----END RSA PRIVATE KEY-----
 
+
 jobs:
   - name: update-pipeline
     plan:
-      - get: cookbook-workflow-pipeline
+      - get: master-pipeline
         trigger: true
-      - task: update-pipeline
-        file: ci/tasks/update-pipeline.yml
+      - put: fly
         params:
-          uri: http://172.17.0.3:8080
-          username: concourse
-          password: changeme
+          command: set-pipeline
+          options: -c master-pipeline/ci/pipelines/master.yml -p brandocorp-website
+
+      - task: update-pipeline
+        file: brandocorp-website/ci/tasks/update-pipeline.yml
