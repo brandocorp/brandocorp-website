@@ -18,6 +18,9 @@ resources:
       branch: master
       paths:
         - ci/pipelines/master.yml
+        - ci/tasks/*
+        - ci/scripts/*
+
       private_key: |
         -----BEGIN RSA PRIVATE KEY-----
         MIIEpQIBAAKCAQEA55heTZ8bibOsMk1h/tMtorgwdM5jGcQDuo92+vIfHwuaG0Ul
