@@ -104,3 +104,22 @@ jobs:
         trigger: true
       - task: berks-install
         file: brandocorp-website/ci/tasks/berks-install.yml
+
+  - name: lint
+    plan:
+      - get: brandocorp-website
+        trigger: true
+      - task: lint
+        file: brandocorp-website/ci/tasks/lint.yml
+  - name: style
+    plan:
+      - get: brandocorp-website
+        trigger: true
+      - task: style
+        file: brandocorp-website/ci/tasks/style.yml
+  - name: unit
+    plan:
+      - get: brandocorp-website
+        trigger: true
+      - task: unit
+        file: brandocorp-website/ci/tasks/unit.yml
