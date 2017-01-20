@@ -2,4 +2,4 @@
 eval "$(chef shell-init bash)"
 
 cd brandocorp-website
-berks install
+rspec
