@@ -16,7 +16,8 @@ resources:
     source:
       uri: https://supermarket.chef.io
       name: apache2
-      constraint: ~> 3.2.2
+      constraint: ~> 3.2.0
+
   - name: berksfile
     type: git
     source:
