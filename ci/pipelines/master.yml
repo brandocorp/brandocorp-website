@@ -11,6 +11,12 @@ resource_types:
       tag: latest
 
 resources:
+  - name: apache2
+    type: supermarket-cookbook
+    source:
+      uri: https://supermarket.chef.io
+      name: apache2
+      constraint: ~> 3.2.2
   - name: berksfile
     type: git
     source:
@@ -92,7 +98,6 @@ resources:
         - ci/pipelines/master.yml
         - ci/tasks/*
         - ci/scripts/*
-
       private_key: |
         -----BEGIN RSA PRIVATE KEY-----
         MIIEpQIBAAKCAQEA55heTZ8bibOsMk1h/tMtorgwdM5jGcQDuo92+vIfHwuaG0Ul
@@ -162,3 +167,14 @@ jobs:
         trigger: true
       - task: unit
         file: brandocorp-website/ci/tasks/unit.yml
+
+  - name: apache2-dependency-update
+    plan:
+      - get: apache2
+        trigger: true
+      - get: brandocorp-website
+      - task: update-dependency-cookbook
+        file: brandocorp-website/ci/tasks/update-dependency-cookbook.yml
+        path: brandocorp-website/ci/scripts/update-dependency-cookbook.sh
+        params:
+          cookbook: apache2
