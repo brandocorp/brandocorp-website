@@ -52,6 +52,8 @@ resources:
     source:
       uri: git@github.com:brandocorp/brandocorp-website.git
       branch: master
+      ignore_paths:
+        - ci/*
       private_key: |
         -----BEGIN RSA PRIVATE KEY-----
         MIIEpQIBAAKCAQEA55heTZ8bibOsMk1h/tMtorgwdM5jGcQDuo92+vIfHwuaG0Ul
