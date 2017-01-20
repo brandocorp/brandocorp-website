@@ -14,6 +14,7 @@ resources:
   - name: apache2
     type: supermarket-cookbook
     source:
+      type: supermarket
       uri: https://supermarket.chef.io
       name: apache2
       constraint: ~> 3.2.0
